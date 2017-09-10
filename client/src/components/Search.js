@@ -4,7 +4,7 @@ import Autocomplete from 'react-autocomplete';
 import debounce from 'lodash.debounce';
 import qs from 'qs';
 
-import { query, search, get_terms } from '../actions';
+import { search, get_terms } from '../actions';
 
 // FIXME
 window.get_terms = get_terms;
@@ -80,7 +80,7 @@ export default class Search extends React.Component {
       search: store.queryString,
     })
     store.progress();
-    query(store.query)
+    search(store.query)
     .then(res => store.results = res)
     .then(() => store.progress(false));
     e && e.preventDefault();
