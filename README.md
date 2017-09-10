@@ -1,6 +1,10 @@
 ### Web UI for [Xapers](https://finestructure.net/xapers/) -- a personal journal article management system.
 
+#### Motivation
+Sometimes I like to read papers on my tablet while lying on coach.
+
 #### Features:
+* Access your papers database on any device in local network
 * Search database
 * Sort (desc/asc) by ID, Year, Relevance
 * Load document via browser
@@ -9,7 +13,7 @@
 
 #### Dev server
 
-In this mode requests to `/api` endpoint are proxied to python web server on `localhost:5000`.
+In this mode requests to `/api` endpoint are proxied to python web server on `localhost:5000`. Source code changes are compiled on the fly and UI is hot module reloaded.
 ```sh
 # Run webpack dev server and python server
 $ cd client/ && yarn install && yarn start
