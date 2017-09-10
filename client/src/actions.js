@@ -1,14 +1,16 @@
 import qs from 'qs';
 import Retry from 'promise-retry';
 
-export const URL = '//localhost:5000/';
+export const URL = '/api';
 
 export function query({q={}, baseURL=URL, pathname='', headers={}, retry=true}) {
   const queryObject = typeof(q) === 'object' ? q : { q };
   const queryString = qs.stringify(queryObject);
+  const url = `${baseURL}/${pathname}${queryString && '?'}${queryString}`.replace('//', '/');
+
   return Retry((doretry, number) => {
     console.log('Retry', number);
-    return fetch(`${baseURL}/${pathname}${queryString && '?'}${queryString}`, {
+    return fetch(url, {
       headers: { Accept: 'application/json', ...headers },
     })
     .then(r => r.json())
@@ -17,12 +19,8 @@ export function query({q={}, baseURL=URL, pathname='', headers={}, retry=true}) 
   })
 }
 
-export function search (store, q) {
-  return query({ q })
-  .then(items => {
-    store.results.replace(items);
-    return items;
-  });
+export function search (q) {
+  return query({ q, pathname: "search" });
 }
 
 export function get_terms(prefix) {
