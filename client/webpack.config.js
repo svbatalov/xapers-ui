@@ -13,7 +13,7 @@ module.exports = removeEmpty({
 
   output: {
     filename: ifProduction('[name]-bundle-[hash].js', '[name]-bundle.js'),
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
   },
 
   module: {
@@ -54,6 +54,12 @@ module.exports = removeEmpty({
     overlay: true,
     stats: 'normal',
     disableHostCheck: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000/',
+        secure: false,
+      },
+    }
   }),
 
   plugins: removeEmpty([
