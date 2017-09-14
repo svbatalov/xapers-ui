@@ -11,6 +11,16 @@ Sometimes I like to read papers on my tablet while lying on coach.
 * Edit bibtex entry and tags
 * Tag autocompletion
 
+#### Wishlist
+* Limit via `limit:N` keyword or similar
+* Smart autocompletion
+* Uploading new articles with doi/arXiv ID detection
+* Better UI
+
+#### Python dependencies
+1. `sudo apt install xapers` (Debian-based distros) or equivalent
+2. `pip install flask eventlet argparse`
+
 #### Dev server
 
 In this mode requests to `/api` endpoint are proxied to python web server on `localhost:5000`. Source code changes are compiled on the fly and UI is hot module reloaded.
@@ -26,3 +36,6 @@ $ cd client/ && yarn install && yarn build
 # Run server
 $ ../server/server.py
 ```
+
+#### License
+MIT
