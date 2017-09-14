@@ -70,7 +70,6 @@ def create_api(args):
 
         if 'bibtex' in data:
             bibtex = data['bibtex']
-            print 'Setting bibtex', bibtex
             doc.add_bibtex(bibtex)
 
         if 'tags' in data:

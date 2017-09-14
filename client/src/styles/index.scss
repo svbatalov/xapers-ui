@@ -10,8 +10,8 @@ body {
   color: $primary-color;
 }
 
-body * {
-  font: large bold $font-stack;
+body {
+  font: 1.5em bold $font-stack;
 }
 
 .search_container {
@@ -26,6 +26,7 @@ body * {
   }
 
   input {
+    font: inherit;
     display: block;
     width: 100%;
     padding: 5px;
@@ -40,6 +41,7 @@ body * {
   }
 
   .search_button {
+    font: inherit;
     display: inline-block;
     padding: 5px;
     border: 1px solid black;
@@ -48,7 +50,7 @@ body * {
       background: lightgray;
     }
   }
-  
+
   .item {
   }
 
@@ -123,68 +125,6 @@ body * {
   }
 }
 
-// i.glyphicon { display: none; }
-// .btn-add::after { content: 'Add'; }
-// .array-item-move-up::after { content: 'Move Up'; }
-// .array-item-move-down::after { content: 'Move Down'; }
-// .array-item-remove::after { content: 'Remove'; }
-
-// .myfield .myfield {
-//   float: left;
-//   width: 50%;
-//   padding: 0 1em;
-// }
-
-// fieldset .myfield:nth-child(even) {
-//   clear: left;
-// }
-
-// form > p {
-//   padding: 1em;
-// }
-
-.paper-details-form {
-  font: large;
-  label {
-    // float: left;
-    display: inline-block;
-    width: 10%;
-    margin-right: 0.5em;
-    text-align: right;
-    font-weight: bold;
-    height: $form-control-height;
-    line-height: $form-control-height;
-  }
-
-  fieldset { border: none; }
-  // fieldset { border:1px solid green }
-
-  legend {
-    padding: 0.2em 0.5em;
-    font-size: 120%;
-    text-align: center;
-  }
-
-  .form-control {
-    // float: left;
-    display: inline-block;
-    width: 80%;
-
-    margin: 5px 0;
-    padding: 5px;
-
-    border: 1px solid gray;
-    border-radius: 5px;
-  }
-
-  .multiselect-form-control {
-    display: inline-block;
-    width: 80%;
-    margin: 0;
-    padding: 0;
-  }
-}
-
 .Select {
   border: none !important;
   .Select-control {
@@ -195,10 +135,34 @@ body * {
   }
 }
 
-// .btn {
-//   padding: 10px;
-//   background: $myblue;
-//   border: 1px solid black;
-//   border-radius: 5px;
-//   font: $default-font;
-// }
+.edit-panel {
+  font: inherit;
+  margin: 1rem 2rem;
+  width: 80%;
+  // margin: 0 auto;
+
+  label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+
+  textarea {
+    width: 100%;
+    font: inherit;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: 0;
+    padding: 10px 15px;
+    margin: 15px;
+    margin-left: 0;
+    // background: $myblue;
+    &:hover {
+      background: $myblue;
+    }
+  }
+}
+
