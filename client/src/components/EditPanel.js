@@ -35,6 +35,7 @@ export default class EditPanel extends React.Component {
     ev.preventDefault();
     console.log('SUBMIT', this.state.item);
     save_retry(this.state.item);
+    this.props.history.goBack();
   }
 
   onBibtexChange = (ev, ...rest) => {
@@ -51,7 +52,10 @@ export default class EditPanel extends React.Component {
     this.setState({ item })
   }
 
-  onReset = () => this.setState({item: clone(this.state.initialItem) });
+  onReset = () => {
+    this.setState({item: clone(this.state.initialItem) });
+    this.props.history.goBack();
+  }
 
   render() {
     const data = this.state.item;
