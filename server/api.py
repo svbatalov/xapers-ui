@@ -87,6 +87,14 @@ def create_api(args):
     def search():
         keywords = request.args.get('q', '')
         limit = int(request.args.get('l', 0))
+
+        r = re.compile(r"(l|limit):\s*([0-9]+)\s*")
+        matches = r.findall(keywords)
+        if matches:
+            limit = int(matches[-1][1])
+
+        keywords = r.sub("", keywords).strip()
+
         res = queryDB(keywords, limit)
         res = [ {'id': item.get_docid(),
                  'key': item.get_key(),
