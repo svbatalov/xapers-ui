@@ -4,7 +4,7 @@ import Autocomplete from 'react-autocomplete';
 import debounce from 'lodash.debounce';
 import qs from 'qs';
 
-import { search, get_terms } from '../actions';
+import { search, get_terms, get_tags } from '../actions';
 
 // FIXME
 window.get_terms = get_terms;
@@ -40,22 +40,29 @@ export default class Search extends React.Component {
     this.syncWithQueryString(newProps);
   }
 
-  get_completions = debounce(() => {
-    const { store } = this.props;
-    let word = store.query.q.split(' ').pop();
-    if (!word) {
-      this.setState({ items: [] });
+  get_prefix_and_word = (q) => {
+    if (!this.input)
       return;
+
+    const { store } = this.props;
+    const query = store.query.q;
+    const input = this.input.refs.input;
+
+    const cursor = input.selectionStart;
+    const match = /((\w+):)?(\w+)?$/.exec(query.substring(0,cursor)) || [];
+    const [, , prefix, word ] = match;
+    return [prefix, word, match];
+  }
+
+  get_completions = debounce(() => {
+    const [prefix, word] = this.get_prefix_and_word();
+
+    if (prefix === 'tag') {
+      return get_tags(word)
+      .then(items => this.setState({ items }));
     }
 
-    let prefix = word.toLowerCase();
-    if (prefix[prefix.length-1] == ':') {
-      // Strip last colon
-      prefix = prefix.substring(0, prefix.length-1);
-    }
-    return get_terms(prefix)
-    // .then(items => items.map(i => (word + i)))
-    .then(items => this.setState({ items }));
+    this.setState({ items: [] });
   }, 500);
 
   onChange = (e) => {
@@ -67,10 +74,16 @@ export default class Search extends React.Component {
   onSelect = (value, item) => {
     console.log('SELECT', value, item);
     const { store } = this.props;
-    let words = store.query.q.split(' ');
-    words.pop();
-    words.push(value);
-    store.query.q = words.join(' ');
+    const q = store.query.q;
+    const input = this.input.refs.input;
+    input.setSelectionRange(this.cursor, this.cursor);
+
+    const [prefix, word, match] = this.get_prefix_and_word();
+    const newValue = prefix ? `${prefix}:${value}` : value;
+    const start = q.substring(0, match.index);
+    const end = q.substring(match.index + match[0].length);
+    console.log(`AFTER SELECT: start=${start};new=${newValue};end=${end}`, match);
+    store.query.q = start + newValue + end;
   };
 
   onSubmit = (e) => {
@@ -88,7 +101,14 @@ export default class Search extends React.Component {
     this.input && this.input.blur();
   }
 
+  componentDidUpdate() {
+    console.log('DID UPDATE');
+    if (this.input) {
+      this.cursor = this.input.refs.input.selectionStart;
+    }
+  }
   render () {
+    console.log(`render: cursor =`, this.cursor, this.newCursor);
     return (
       <div className="search_container">
         <form onSubmit={this.onSubmit}>
