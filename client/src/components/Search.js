@@ -75,7 +75,17 @@ export default class Search extends React.Component {
 
   onSubmit = (e) => {
     console.log('Submit');
+
     const { store, history } = this.props;
+    if (store.query.q) {
+      const re = /(l|limit):[ \t]*([0-9]+)/;
+      const m = store.query.q.match(re);
+      if (m) {
+        store.query.l = m[2];
+        store.query.q = store.query.q.replace(m, '');
+      }
+    }
+
     history.push({
       search: store.queryString,
     })
