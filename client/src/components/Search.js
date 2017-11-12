@@ -115,7 +115,7 @@ export default class Search extends React.Component {
             ref={el => this.input = el}
             autoHighlight={false}
             inputProps={{
-              placeholder: "Search query, e.g. a:Author, tag:Tagname, y:2000.. limit:10 or l:10",
+              placeholder: "Search query, e.g. a:Author tag:Tagname y:2000.. limit:10 (or l:10)",
             }}
             wrapperProps={{
               className: 'autocompleteWrapper'
