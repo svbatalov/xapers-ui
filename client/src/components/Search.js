@@ -107,7 +107,6 @@ export default class Search extends React.Component {
     }
   }
   render () {
-    console.log(`render: cursor =`, this.cursor, this.newCursor);
     return (
       <div className="search_container">
         <form onSubmit={this.onSubmit}>
