@@ -76,6 +76,8 @@ module.exports = removeEmpty({
       environment: nodeEnv,
     }),
 
+    new webpack.NamedModulesPlugin(),
+
     ifProduction(new CopyWebpackPlugin([{ from: 'assets', to: 'assets' }])),
 
     ifProduction(
