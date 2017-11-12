@@ -5,7 +5,7 @@ export default class Store {
   @observable query = { q: '' };
   @observable search = '';
   @observable results = [];
-  @observable sortBy = 'relevance';
+  @observable sortBy = 'id';
   @observable sortDir = false; // false <-> descending
   @observable requesting = false;
 
