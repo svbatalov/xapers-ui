@@ -111,17 +111,18 @@ body {
   div {
     display: inline-block;
     border: 1px solid black;
-    border-radius: 3px;
+    // border-radius: 3px;
     padding: 2px;
     margin: 5px;
 
     &:hover {
-      background-color: lightgray;
+      background-color: $myblue;
     }
 
   }
   .selected {
-    background-color: $myblue !important;
+    // background-color: $myblue !important;
+    border: 3px solid black;
   }
 }
 
