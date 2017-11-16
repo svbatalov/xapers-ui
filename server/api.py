@@ -95,7 +95,12 @@ def create_api(args):
 
         keywords = r.sub("", keywords).strip()
 
-        res = queryDB(keywords, limit)
+        #  res = queryDB(keywords, limit)
+        res = queryDB(keywords)
+        res = sorted(res, key=lambda x: x.docid)
+        if limit > 0:
+            res = res[-limit:]
+
         res = [ {'id': item.get_docid(),
                  'key': item.get_key(),
                  'matchp': item.matchp,
